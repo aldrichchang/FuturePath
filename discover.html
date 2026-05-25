@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Discover | FuturePath</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.35), transparent 35%),
+        linear-gradient(135deg, #e0f2fe, #bfdbfe, #93c5fd);
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(239, 246, 255, 0.88);
+      backdrop-filter: blur(15px);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+      color: #1e40af !important;
+      font-weight: 500;
+      margin-left: 12px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0284c7 !important;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Hero */
+    .discover-hero {
+      padding: 70px 20px 60px;
+      text-align: center;
+    }
+
+    .badge-text {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #1e40af;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 25px rgba(30, 64, 175, 0.08);
+    }
+
+    .discover-hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 22px;
+      color: #0f172a;
+    }
+
+    .discover-hero h1 span {
+      background: linear-gradient(90deg, #0284c7, #2563eb, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .discover-hero p {
+      max-width: 820px;
+      margin: auto;
+      color: #334155;
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    /* Quiz */
+    .quiz-wrapper {
+      padding: 30px 20px 90px;
+    }
+
+    .quiz-card,
+    .result-card {
+      max-width: 1030px;
+      margin: auto;
+      padding: 42px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      box-shadow: 0 25px 80px rgba(30, 64, 175, 0.14);
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .section-label {
+      padding: 9px 18px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+    }
+
+    .question-count {
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .progress {
+      height: 10px;
+      border-radius: 50px;
+      background-color: rgba(37, 99, 235, 0.12);
+      margin-bottom: 34px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #38bdf8, #2563eb, #1d4ed8);
+      transition: width 0.4s ease;
+    }
+
+    .question-box {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 35px;
+      padding: 22px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .question-box h2 {
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      font-weight: 800;
+      line-height: 1.45;
+      color: #0f172a;
+    }
+
+    .scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 35px;
+    }
+
+    .answer-btn {
+      border: none;
+      padding: 18px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.48);
+      color: #1e3a8a;
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 10px 26px rgba(30, 64, 175, 0.08);
+    }
+
+    .answer-btn small {
+      display: block;
+      margin-top: 5px;
+      color: #334155;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .answer-btn:hover {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(37, 99, 235, 0.3);
+    }
+
+    .answer-btn:hover small {
+      color: #eff6ff;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 800;
+      transition: 0.3s ease;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.48);
+      color: #1e40af;
+      border: 1px solid rgba(37, 99, 235, 0.14);
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .restart-btn,
+    .blue-btn {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .restart-btn:hover,
+    .blue-btn:hover {
+      transform: translateY(-4px);
+      color: white;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Result */
+    .result-card {
+      display: none;
+    }
+
+    .result-card h2 {
+      font-weight: 900;
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      color: #0f172a;
+    }
+
+    .result-main {
+      padding: 30px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(186, 230, 253, 0.72), rgba(219, 234, 254, 0.8));
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      box-shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+      margin-bottom: 28px;
+    }
+
+    .result-main h3 {
+      font-weight: 900;
+      color: #0369a1;
+      margin-bottom: 12px;
+    }
+
+    .result-main p {
+      color: #334155;
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+
+    .mini-heading {
+      font-weight: 900;
+      color: #0f172a;
+      margin: 26px 0 16px;
+    }
+
+    .sector-grid,
+    .career-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .sector-item,
+    .career-item {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      box-shadow: 0 16px 45px rgba(30, 64, 175, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .sector-item:hover,
+    .career-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .sector-item h5,
+    .career-item h5 {
+      color: #0369a1;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .sector-item p,
+    .career-item p {
+      color: #334155;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .score-pill {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 50px;
+      background: rgba(37, 99, 235, 0.1);
+      color: #1e40af;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .score-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(37, 99, 235, 0.12);
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #38bdf8, #2563eb);
+    }
+
+    .next-steps {
+      margin-top: 28px;
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.64);
+    }
+
+    .next-steps ul {
+      margin-bottom: 0;
+      color: #334155;
+      line-height: 1.8;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(219, 234, 254, 0.95);
+      backdrop-filter: blur(15px);
+      color: #0f172a;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    footer h5 {
+      color: #1e40af;
+      font-weight: 800;
+    }
+
+    footer p {
+      color: #334155;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin-right: 15px;
+      transition: 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #0284c7;
+    }
+
+    @media (max-width: 768px) {
+      .discover-hero {
+        padding: 130px 20px 60px;
+      }
+
+      .quiz-card,
+      .result-card {
+        padding: 28px 20px;
+      }
+
+      .scale {
+        grid-template-columns: 1fr;
+      }
+
+      .answer-btn {
+        padding: 16px;
+      }
+
+      .navigation-buttons {
+        justify-content: center;
+      }
+
+      footer a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">FuturePath</a>
+
+      <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+       <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="discover.html">Discover</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="careers.html">Careers</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="skills.html">Skills</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="mentorship.html">Mentorship</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="resources.html">Resources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="discover-hero">
+    <div class="container">
+      <div class="badge-text">Personalised Career Discovery Quiz</div>
+      <h1>Discover Your <span>Future Path</span></h1>
+      <p>
+        Answer questions about your interests, strengths, personality and working style.
+        The quiz will suggest suitable career sectors and possible jobs you can explore.
+      </p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="quiz-wrapper">
+
+    <div class="quiz-card" id="quizCard">
+
+      <div class="quiz-top">
+        <div class="section-label" id="sectionLabel">Section</div>
+        <div class="question-count" id="questionCount">Question 1 of 30</div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+      </div>
+
+      <div class="question-box">
+        <h2 id="questionText">Question appears here</h2>
+      </div>
+
+      <div class="scale">
+        <button class="answer-btn" onclick="answerQuestion(1)">
+          1
+          <small>Strongly Disagree</small>
+        </button>
+
+        <button class="answer-btn" onclick="answerQuestion(2)">
+          2
+          <small>Disagree</small>
+        </button>
+
+        <button class="answer-btn" onclick="answerQuestion(3)">
+          3
+          <small>Neutral</small>
+        </button>
+
+        <button class="answer-btn" onclick="answerQuestion(4)">
+          4
+          <small>Agree</small>
+        </button>
+
+        <button class="answer-btn" onclick="answerQuestion(5)">
+          5
+          <small>Strongly Agree</small>
+        </button>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="nav-btn back-btn" onclick="goBack()">Previous Question</button>
+        <button class="nav-btn restart-btn" onclick="restartQuiz()">Restart Quiz</button>
+      </div>
+
+    </div>
+
+    <!-- Result -->
+    <div class="result-card" id="resultCard">
+      <h2>Your Career Direction</h2>
+
+      <div class="result-main">
+        <h3 id="resultTitle">Result Title</h3>
+        <p id="resultDescription">Result description appears here.</p>
+      </div>
+
+      <h4 class="mini-heading">Recommended Sectors You Can Explore</h4>
+      <div class="sector-grid" id="sectorList"></div>
+
+      <h4 class="mini-heading">Suggested Jobs Based on Your Answers</h4>
+      <div class="career-list" id="careerList"></div>
+
+      <div class="next-steps">
+        <h4 class="mini-heading mt-0">What You Can Do Next</h4>
+        <ul>
+          <li>Choose one recommended sector and explore its job cards in the Careers page.</li>
+          <li>Check the useful skills and helpful subjects for the jobs that interest you most.</li>
+          <li>Use the Skills page to find courses or ways to build your strengths gradually.</li>
+        </ul>
+      </div>
+
+      <div class="mt-4">
+        <button class="nav-btn restart-btn" onclick="restartQuiz()">Retake Quiz</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <h5>FuturePath</h5>
+
+      <p class="mb-2">
+        Helping youths discover, upskill and connect for the future.
+      </p>
+
+      <div>
+        <a href="about.html">About</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const originalQuestions = [
+      {
+        section: "Section A: Work Environment",
+        text: "I prefer working indoors rather than outdoors.",
+        categories: ["healthcare", "business", "technology", "creative"]
+      },
+      {
+        section: "Section A: Work Environment",
+        text: "I prefer a structured job with clear instructions and expectations.",
+        categories: ["business", "healthcare", "research"]
+      },
+      {
+        section: "Section A: Work Environment",
+        text: "I am comfortable working in a fast-paced environment.",
+        categories: ["healthcare", "business", "social"]
+      },
+      {
+        section: "Section A: Work Environment",
+        text: "I prefer working independently rather than being in a team all the time.",
+        categories: ["technology", "research", "creative"]
+      },
+      {
+        section: "Section A: Work Environment",
+        text: "I enjoy jobs that require meeting and interacting with many people.",
+        categories: ["social", "business", "education"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy learning about the human body, health, or medical science.",
+        categories: ["healthcare"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy solving problems using technology, machines, or digital tools.",
+        categories: ["technology", "engineering"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy creating visual designs, videos, stories, or media content.",
+        categories: ["creative"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy understanding how businesses, money, or organisations work.",
+        categories: ["business"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy helping people overcome problems or improve their lives.",
+        categories: ["social", "education", "healthcare"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy studying facts, data, patterns, or research findings.",
+        categories: ["research", "technology"]
+      },
+      {
+        section: "Section B: Interests",
+        text: "I enjoy building, fixing, or improving physical objects or systems.",
+        categories: ["engineering"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at explaining ideas clearly to others.",
+        categories: ["education", "business", "social"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at organising tasks, deadlines, and responsibilities.",
+        categories: ["business"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at analysing information before making a decision.",
+        categories: ["research", "business", "technology"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at coming up with creative ideas.",
+        categories: ["creative"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at staying calm when solving difficult problems.",
+        categories: ["healthcare", "technology", "engineering"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am good at noticing small details that others may miss.",
+        categories: ["research", "healthcare", "technology"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am confident when speaking in front of a group.",
+        categories: ["business", "education", "social"]
+      },
+      {
+        section: "Section C: Strengths and Skills",
+        text: "I am patient when helping others learn or improve.",
+        categories: ["education", "social", "healthcare"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I enjoy leading a group and making decisions.",
+        categories: ["business", "social"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I prefer using facts and logic rather than emotions when solving problems.",
+        categories: ["technology", "research", "engineering"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I am comfortable taking responsibility when something goes wrong.",
+        categories: ["business", "healthcare", "engineering"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I enjoy trying new methods even if they may not work at first.",
+        categories: ["creative", "technology", "engineering"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I prefer tasks that involve creativity rather than repeated routines.",
+        categories: ["creative"]
+      },
+      {
+        section: "Section D: Personality and Working Style",
+        text: "I can work for long periods on a difficult task without giving up easily.",
+        categories: ["research", "technology", "engineering"]
+      },
+      {
+        section: "Section E: Weaknesses and Preferences",
+        text: "I feel drained when I need to socialise for a long time.",
+        categories: ["technology", "research", "creative"]
+      },
+      {
+        section: "Section E: Weaknesses and Preferences",
+        text: "I find it stressful when tasks are unclear or constantly changing.",
+        categories: ["business", "healthcare", "research"]
+      },
+      {
+        section: "Section E: Weaknesses and Preferences",
+        text: "I dislike jobs that require a lot of physical activity.",
+        categories: ["technology", "business", "creative", "research"]
+      },
+      {
+        section: "Section E: Weaknesses and Preferences",
+        text: "I prefer careers where I can continue learning new skills in the future.",
+        categories: ["technology", "healthcare", "research", "business", "creative"]
+      }
+    ];
+
+    const careerProfiles = {
+      healthcare: {
+        title: "Healthcare and Medical Science",
+        description: "This sector suits students who are interested in health, science, care, responsibility and solving problems under pressure.",
+        careers: [
+          ["Doctor", "Diagnoses illnesses, treats patients and manages health conditions."],
+          ["Nurse", "Provides patient care, monitors recovery and supports medical teams."],
+          ["Dentist", "Treats teeth and gum problems while improving oral health."],
+          ["Physiotherapist", "Helps people regain movement after injury or illness."],
+          ["Pharmacist", "Advises patients on medicines, dosage and safe use."]
+        ]
+      },
+
+      technology: {
+        title: "Technology and Digital Innovation",
+        description: "This sector suits students who enjoy coding, digital tools, systems, logic and continuous learning.",
+        careers: [
+          ["Software Developer", "Builds websites, apps and digital systems."],
+          ["Cybersecurity Analyst", "Protects data, networks and systems from cyber threats."],
+          ["Data Analyst", "Uses data to identify trends and support decisions."],
+          ["AI Engineer", "Creates intelligent systems using machine learning."],
+          ["Cloud Engineer", "Builds and manages online computing systems."]
+        ]
+      },
+
+      creative: {
+        title: "Creative Media and Design",
+        description: "This sector suits students who enjoy imagination, design, storytelling, media and original ideas.",
+        careers: [
+          ["Graphic Designer", "Creates visual designs for brands, posters and campaigns."],
+          ["Video Producer", "Plans, films and edits video content."],
+          ["Content Creator", "Produces digital content for online audiences."],
+          ["UX Designer", "Designs user-friendly websites and apps."],
+          ["Animator", "Creates moving visuals for stories, games or media."]
+        ]
+      },
+
+      business: {
+        title: "Business, Leadership and Management",
+        description: "This sector suits students who enjoy organisation, leadership, finance, planning and decision making.",
+        careers: [
+          ["Business Manager", "Leads teams and manages organisational goals."],
+          ["Marketing Executive", "Promotes products, services and campaigns."],
+          ["Financial Analyst", "Studies money, investments and financial data."],
+          ["Project Manager", "Organises tasks, timelines and people to complete projects."],
+          ["Entrepreneur", "Starts businesses and turns ideas into solutions."]
+        ]
+      },
+
+      social: {
+        title: "Social Impact and People-Centred Work",
+        description: "This sector suits students who value empathy, communication, helping others and improving lives.",
+        careers: [
+          ["Counsellor", "Supports people through emotional and personal challenges."],
+          ["Social Worker", "Helps individuals and families access support."],
+          ["Human Resource Officer", "Supports employees, hiring and workplace wellbeing."],
+          ["Community Programme Coordinator", "Plans programmes that benefit communities."],
+          ["Police Officer", "Protects public safety and responds to emergencies."]
+        ]
+      },
+
+      research: {
+        title: "Research, Data and Analysis",
+        description: "This sector suits students who enjoy facts, evidence, details, patterns and deep investigation.",
+        careers: [
+          ["Research Scientist", "Studies questions through experiments and evidence."],
+          ["Data Scientist", "Finds patterns in complex data."],
+          ["Market Research Analyst", "Studies consumer behaviour and trends."],
+          ["Policy Analyst", "Researches issues and suggests improvements."],
+          ["Biotechnologist", "Uses biology and technology to develop useful products."]
+        ]
+      },
+
+      engineering: {
+        title: "Engineering and Practical Problem Solving",
+        description: "This sector suits students who enjoy building, fixing, improving systems and solving technical problems.",
+        careers: [
+          ["Mechanical Engineer", "Designs and improves machines and systems."],
+          ["Electrical Engineer", "Works with circuits, power and electronic systems."],
+          ["Civil Engineer", "Designs infrastructure such as roads, bridges and buildings."],
+          ["Robotics Engineer", "Builds robots and automated systems."],
+          ["Semiconductor Engineer", "Works on chips, electronics and advanced manufacturing."]
+        ]
+      },
+
+      education: {
+        title: "Education and Teaching",
+        description: "This sector suits students who enjoy explaining ideas, guiding others and helping people improve.",
+        careers: [
+          ["Teacher", "Helps students learn knowledge, values and skills."],
+          ["Trainer", "Teaches specific skills to learners."],
+          ["Education Specialist", "Designs learning programmes and resources."],
+          ["Career Coach", "Guides people in planning future pathways."],
+          ["Learning Designer", "Creates lessons, courses and digital learning materials."]
+        ]
+      }
+    };
+
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let answers = [];
+    let scores = {};
+
+    function shuffleQuestions(array) {
+      return [...array].sort(() => Math.random() - 0.5);
+    }
+
+    function startQuiz() {
+      questions = shuffleQuestions(originalQuestions);
+      currentQuestionIndex = 0;
+      answers = [];
+
+      scores = {
+        healthcare: 0,
+        technology: 0,
+        creative: 0,
+        business: 0,
+        social: 0,
+        research: 0,
+        engineering: 0,
+        education: 0
+      };
+
+      document.getElementById("quizCard").style.display = "block";
+      document.getElementById("resultCard").style.display = "none";
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const question = questions[currentQuestionIndex];
+
+      document.getElementById("sectionLabel").textContent = question.section;
+      document.getElementById("questionText").textContent = question.text;
+      document.getElementById("questionCount").textContent =
+        `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+      const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
+      document.getElementById("progressBar").style.width = progressPercent + "%";
+    }
+
+    function answerQuestion(value) {
+      const question = questions[currentQuestionIndex];
+
+      answers[currentQuestionIndex] = {
+        question: question.text,
+        value: value,
+        categories: question.categories
+      };
+
+      question.categories.forEach(category => {
+        scores[category] += value;
+      });
+
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function goBack() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+
+        const previousAnswer = answers[currentQuestionIndex];
+
+        if (previousAnswer) {
+          previousAnswer.categories.forEach(category => {
+            scores[category] -= previousAnswer.value;
+          });
+
+          answers[currentQuestionIndex] = null;
+        }
+
+        showQuestion();
+      }
+    }
+
+    function getTopSectors() {
+      return Object.keys(scores)
+        .sort((a, b) => scores[b] - scores[a])
+        .slice(0, 3);
+    }
+
+    function showResult() {
+      document.getElementById("progressBar").style.width = "100%";
+
+      const topSectors = getTopSectors();
+      const mainSector = topSectors[0];
+      const result = careerProfiles[mainSector];
+      const highestScore = Math.max(...Object.values(scores));
+
+      document.getElementById("quizCard").style.display = "none";
+      document.getElementById("resultCard").style.display = "block";
+
+      document.getElementById("resultTitle").textContent = `Best Match: ${result.title}`;
+      document.getElementById("resultDescription").textContent =
+        `${result.description} You can also explore your second and third recommended sectors below, because career interests are often connected across different fields.`;
+
+      const sectorList = document.getElementById("sectorList");
+      sectorList.innerHTML = "";
+
+      topSectors.forEach((sector, index) => {
+        const profile = careerProfiles[sector];
+        const scorePercent = highestScore === 0 ? 0 : Math.round((scores[sector] / highestScore) * 100);
+
+        const sectorItem = document.createElement("div");
+        sectorItem.className = "sector-item";
+
+        sectorItem.innerHTML = `
+          <span class="score-pill">Rank ${index + 1} · Match ${scorePercent}%</span>
+          <h5>${profile.title}</h5>
+          <p>${profile.description}</p>
+          <div class="score-track">
+            <div class="score-fill" style="width: ${scorePercent}%;"></div>
+          </div>
+        `;
+
+        sectorList.appendChild(sectorItem);
+      });
+
+      const careerList = document.getElementById("careerList");
+      careerList.innerHTML = "";
+
+      topSectors.forEach(sector => {
+        const profile = careerProfiles[sector];
+
+        profile.careers.forEach(career => {
+          const careerItem = document.createElement("div");
+          careerItem.className = "career-item";
+
+          careerItem.innerHTML = `
+            <span class="score-pill">${profile.title}</span>
+            <h5>${career[0]}</h5>
+            <p>${career[1]}</p>
+          `;
+
+          careerList.appendChild(careerItem);
+        });
+      });
+    }
+
+    function restartQuiz() {
+      startQuiz();
+    }
+
+    startQuiz();
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

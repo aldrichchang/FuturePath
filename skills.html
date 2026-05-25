@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Skills | FuturePath</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.35), transparent 35%),
+        linear-gradient(135deg, #e0f2fe, #bfdbfe, #93c5fd);
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(239, 246, 255, 0.88);
+      backdrop-filter: blur(15px);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+      color: #1e40af !important;
+      font-weight: 500;
+      margin-left: 12px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0284c7 !important;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Hero Section */
+    .page-hero {
+      padding: 70px 20px 60px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #1e40af;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 25px rgba(30, 64, 175, 0.08);
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 22px;
+      color: #0f172a;
+    }
+
+    .page-hero h1 span {
+      background: linear-gradient(90deg, #0284c7, #2563eb, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-hero p {
+      max-width: 820px;
+      margin: auto;
+      color: #334155;
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    /* General Sections */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+
+    .section-subtitle {
+      color: #334155;
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .text-muted {
+      color: #334155 !important;
+      line-height: 1.8;
+    }
+
+    /* Glass Cards */
+    .info-card,
+    .sector-card,
+    .step-card {
+      height: 100%;
+      padding: 28px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 22px 60px rgba(30, 64, 175, 0.12);
+      transition: 0.3s ease;
+    }
+
+    .info-card:hover,
+    .sector-card:hover,
+    .step-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 20px 45px rgba(30, 64, 175, 0.16);
+    }
+
+    .info-card h4,
+    .sector-card h4,
+    .step-card h4 {
+      color: #0369a1;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .highlight-box {
+      padding: 32px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(186, 230, 253, 0.72), rgba(219, 234, 254, 0.8));
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      box-shadow: 0 25px 70px rgba(30, 64, 175, 0.14);
+    }
+
+    .highlight-box h4 {
+      color: #0369a1;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .glass-section {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    /* Skill Tags */
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 50px;
+      background: rgba(219, 234, 254, 0.9);
+      color: #1e40af;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(186, 230, 253, 0.9), rgba(147, 197, 253, 0.85));
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+    }
+
+    .step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
+    }
+
+    .sector-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #2563eb;
+      font-weight: 800;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .sector-link:hover {
+      color: #0284c7;
+      transform: translateX(4px);
+    }
+
+    .coming-soon {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+
+    /* Button */
+    .blue-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+      transition: 0.3s ease;
+    }
+
+    .blue-btn:hover {
+      transform: translateY(-4px);
+      color: white;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.35);
+    }
+
+    .outline-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.45);
+      color: #1e40af;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      transition: 0.3s ease;
+      margin-left: 10px;
+    }
+
+    .outline-btn:hover {
+      transform: translateY(-4px);
+      color: #0284c7;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Animation */
+    .float-in {
+      opacity: 0;
+      transform: translateY(35px);
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(219, 234, 254, 0.95);
+      backdrop-filter: blur(15px);
+      color: #0f172a;
+      padding: 40px 0;
+      margin-top: 60px;
+      border-top: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    footer h5 {
+      color: #1e40af;
+      font-weight: 800;
+    }
+
+    footer p {
+      color: #334155;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin-right: 15px;
+      transition: 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #0284c7;
+    }
+
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 130px 20px 60px;
+      }
+
+      .info-card,
+      .sector-card,
+      .step-card,
+      .highlight-box {
+        padding: 24px;
+      }
+
+      .outline-btn {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+
+      footer a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">FuturePath</a>
+
+      <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="discover.html">Discover</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="careers.html">Careers</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="skills.html">Skills</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="mentorship.html">Mentorship</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="resources.html">Resources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero float-in">
+    <div class="container">
+      <div class="hero-badge">Sector Skills Roadmap</div>
+
+      <h1>Build <span>Future-Ready Skills</span></h1>
+
+      <p>
+        Technology is changing the skills needed in many careers. FuturePath helps youths understand
+        what each sector requires, identify their skill gaps and take practical steps to prepare early.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why Skills Matter -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 float-in delay-1">
+          <h2 class="section-title">Why Skills Matter</h2>
+
+          <p class="text-muted">
+            Skills mismatch happens when youths enter the workforce without the abilities that industries
+            actually need. This can happen when students choose pathways without knowing the skills,
+            tools or mindsets required in the real world.
+          </p>
+
+          <p class="text-muted">
+            This page turns general upskilling into a clearer roadmap. Instead of simply telling youths
+            to “learn new skills”, it shows the types of skills needed across different sectors and how
+            they can begin preparing step by step.
+          </p>
+        </div>
+
+        <div class="col-lg-6 float-in delay-2">
+          <div class="highlight-box">
+            <h4>How This Helps</h4>
+            <p class="text-muted mb-0">
+              Youths can compare their current strengths with sector expectations, then choose suitable
+              subjects, online courses, projects, competitions or mentorship opportunities to close their
+              skill gaps early.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Skill Pillars -->
+  <section class="py-5 glass-section">
+    <div class="container">
+      <div class="text-center mb-5 float-in delay-1">
+        <h2 class="section-title">Core Skill Pillars</h2>
+        <p class="section-subtitle">
+          These are broad skill areas that help youths stay adaptable even as technology changes jobs.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="info-card float-in delay-1">
+            <div class="icon-circle">💻</div>
+            <h4>Digital Skills</h4>
+            <p class="text-muted">
+              Understanding technology, data, online tools and basic digital safety helps youths stay relevant
+              in almost every industry.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Coding Basics</span>
+              <span class="skill-tag">Data Literacy</span>
+              <span class="skill-tag">AI Tools</span>
+              <span class="skill-tag">Cyber Awareness</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-card float-in delay-2">
+            <div class="icon-circle">🧠</div>
+            <h4>Thinking Skills</h4>
+            <p class="text-muted">
+              Critical thinking, problem-solving and decision-making help youths respond to new problems
+              instead of only memorising fixed answers.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Problem Solving</span>
+              <span class="skill-tag">Research</span>
+              <span class="skill-tag">Creativity</span>
+              <span class="skill-tag">Decision Making</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-card float-in delay-3">
+            <div class="icon-circle">🤝</div>
+            <h4>Human Skills</h4>
+            <p class="text-muted">
+              Communication, empathy and teamwork remain important because technology cannot fully replace
+              trust, leadership and human connection.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Communication</span>
+              <span class="skill-tag">Empathy</span>
+              <span class="skill-tag">Leadership</span>
+              <span class="skill-tag">Teamwork</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sector Roadmap Preview -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5 float-in delay-1">
+        <h2 class="section-title">Explore Skills by Sector</h2>
+        <p class="section-subtitle">
+          Each sector requires a different mix of technical knowledge, soft skills and learning actions.
+          Subpages can be added later for more detailed pathways.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-1">
+            <div class="icon-circle">🤖</div>
+            <h4>Technology and AI</h4>
+            <p class="text-muted">
+              For careers involving software, artificial intelligence, cybersecurity, data and digital systems.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Coding</span>
+              <span class="skill-tag">Logic</span>
+              <span class="skill-tag">Data Analysis</span>
+              <span class="skill-tag">Cybersecurity</span>
+            </div>
+            <a href="skillsp/technology-ai.html" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-2">
+            <div class="icon-circle">🩺</div>
+            <h4>Healthcare and Life Sciences</h4>
+            <p class="text-muted">
+              For careers involving medicine, nursing, biotechnology, psychology, research and patient care.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Biology</span>
+              <span class="skill-tag">Empathy</span>
+              <span class="skill-tag">Precision</span>
+              <span class="skill-tag">Ethics</span>
+            </div>
+            <a href="skillsp/healthcare-life-sciences.html" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-3">
+            <div class="icon-circle">🏗️</div>
+            <h4>Engineering and Manufacturing</h4>
+            <p class="text-muted">
+              For careers involving machines, electronics, robotics, construction, product design and production.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Physics</span>
+              <span class="skill-tag">CAD</span>
+              <span class="skill-tag">Troubleshooting</span>
+              <span class="skill-tag">Safety</span>
+            </div>
+            <a href="#" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-1">
+            <div class="icon-circle">💼</div>
+            <h4>Business and Finance</h4>
+            <p class="text-muted">
+              For careers involving accounting, entrepreneurship, management, marketing, law and finance.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Financial Literacy</span>
+              <span class="skill-tag">Excel</span>
+              <span class="skill-tag">Presentation</span>
+              <span class="skill-tag">Strategy</span>
+            </div>
+            <a href="#" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-2">
+            <div class="icon-circle">🎨</div>
+            <h4>Creative Media and Design</h4>
+            <p class="text-muted">
+              For careers involving design, video, writing, branding, content creation, entertainment and media.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Storytelling</span>
+              <span class="skill-tag">Design</span>
+              <span class="skill-tag">Video Editing</span>
+              <span class="skill-tag">Audience Awareness</span>
+            </div>
+            <a href="#" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="sector-card float-in delay-3">
+            <div class="icon-circle">🌱</div>
+            <h4>Sustainability and Environment</h4>
+            <p class="text-muted">
+              For careers involving green technology, conservation, farming, climate action and sustainable systems.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Geography</span>
+              <span class="skill-tag">Systems Thinking</span>
+              <span class="skill-tag">Research</span>
+              <span class="skill-tag">Innovation</span>
+            </div>
+            <a href="#" class="sector-link coming-soon">More information →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Gap Process -->
+  <section class="py-5 glass-section">
+    <div class="container">
+      <div class="text-center mb-5 float-in delay-1">
+        <h2 class="section-title">From Skill Gap to Action</h2>
+        <p class="section-subtitle">
+          FuturePath guides youths through a simple process so upskilling becomes more targeted and less confusing.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="step-card float-in delay-1">
+            <div class="step-number">1</div>
+            <h4>Discover</h4>
+            <p class="text-muted mb-0">
+              Take the career quiz to identify interests, strengths and possible sectors.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="step-card float-in delay-2">
+            <div class="step-number">2</div>
+            <h4>Compare</h4>
+            <p class="text-muted mb-0">
+              Look at the skills needed in each sector and compare them with your current abilities.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="step-card float-in delay-3">
+            <div class="step-number">3</div>
+            <h4>Build</h4>
+            <p class="text-muted mb-0">
+              Start with beginner-friendly courses, projects, school subjects or competitions.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="step-card float-in delay-3">
+            <div class="step-number">4</div>
+            <h4>Connect</h4>
+            <p class="text-muted mb-0">
+              Use mentorship opportunities to learn from seniors, teachers or professionals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Suggested Learning Actions -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 float-in delay-1">
+          <div class="highlight-box">
+            <h4>Beginner Actions for Youths</h4>
+            <p class="text-muted">
+              Start small, but start with purpose. A useful upskilling pathway should help youths know what
+              to do next, not just tell them to work harder.
+            </p>
+            <div class="tag-group">
+              <span class="skill-tag">Try a short online course</span>
+              <span class="skill-tag">Build a small project</span>
+              <span class="skill-tag">Join a competition</span>
+              <span class="skill-tag">Speak to a mentor</span>
+              <span class="skill-tag">Explore subject links</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 float-in delay-2">
+          <h2 class="section-title">Making Upskilling Less Random</h2>
+          <p class="text-muted">
+            Many youths know they need to learn new skills, but they may not know which skills are actually
+            useful for their future. FuturePath solves this by organising skills according to sector, so users
+            can make more focused choices.
+          </p>
+          <p class="text-muted">
+            Later, each sector subpage can include recommended subjects, free course links, project ideas,
+            entry-level career examples and future job trends.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-5 glass-section">
+    <div class="container text-center float-in delay-1">
+      <h2 class="section-title">Start with Your Strengths</h2>
+
+      <p class="section-subtitle mb-4">
+        Take the quiz first, then use the skills roadmap to understand what you need to build next.
+      </p>
+
+      <a href="discover.html" class="blue-btn">Start Career Quiz</a>
+      <a href="careers.html" class="outline-btn">Explore Careers</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <h5>FuturePath</h5>
+
+      <p class="mb-2">
+        Helping youths discover, upskill and connect for the future.
+      </p>
+
+      <div>
+        <a href="about.html">About</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
