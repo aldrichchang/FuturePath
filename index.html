@@ -1144,7 +1144,7 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.35fr 0.8fr 0.9fr 0.9fr;
+      grid-template-columns: 1.4fr 0.8fr 0.9fr 0.9fr;
       gap: 34px;
       align-items: start;
     }
@@ -1159,9 +1159,8 @@
     .footer-desc {
       color: rgba(239, 246, 255, 0.78);
       line-height: 1.7;
-      font-weight: 520;
-      margin-bottom: 20px;
-      max-width: 360px;
+      font-weight: 500;
+      margin-bottom: 22px;
     }
 
     .footer-column {
@@ -1171,18 +1170,19 @@
 
     .footer-column h4 {
       font-size: 0.72rem;
-      font-weight: 850;
+      font-weight: 800;
       letter-spacing: 0.08em;
       color: rgba(220, 240, 255, 0.72);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       text-transform: uppercase;
     }
 
     .footer-column a {
+      text-decoration: none;
       color: rgba(255, 255, 255, 0.92);
       font-size: 0.92rem;
-      font-weight: 680;
-      margin-bottom: 11px;
+      font-weight: 650;
+      margin-bottom: 12px;
       transition: 0.25s ease;
     }
 
@@ -1191,34 +1191,20 @@
       transform: translateX(4px);
     }
 
-    footer {
-      background: rgba(219, 234, 254, 0.95);
-      backdrop-filter: blur(15px);
-      color: var(--slate-900);
-      padding: 40px 0;
-      margin-top: 60px;
-      border-top: 1px solid rgba(37, 99, 235, 0.15);
-    }
-
-    footer h5 {
-      color: var(--blue-800);
-      font-weight: 850;
-    }
-
-    footer p {
-      color: var(--slate-700);
-    }
-
-    footer a {
-      color: var(--blue-600);
-      text-decoration: none;
-      margin-right: 15px;
-      transition: 0.3s ease;
+    .footer-copy {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(220, 240, 255, 0.6);
+      font-size: 0.82rem;
       font-weight: 650;
-    }
-
-    footer a:hover {
-      color: #0284c7;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* Reveal animations */
