@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Interview Tips | FuturePath</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.35), transparent 35%),
+        linear-gradient(135deg, #e0f2fe, #bfdbfe, #93c5fd);
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(239, 246, 255, 0.88);
+      backdrop-filter: blur(18px);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+      color: #1e40af !important;
+      font-weight: 550;
+      margin-left: 10px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0284c7 !important;
+    }
+
+    .dropdown-menu {
+      padding: 10px;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: 18px;
+      background: rgba(239, 246, 255, 0.96);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.14);
+    }
+
+    .dropdown-item {
+      border-radius: 12px;
+      color: #1e40af;
+      font-weight: 600;
+      padding: 9px 14px;
+      transition: 0.25s ease;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus,
+    .dropdown-item.active {
+      color: #0284c7;
+      background: rgba(219, 234, 254, 0.85);
+    }
+
+    @media (min-width: 992px) {
+      .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+      }
+
+      .navbar .dropdown:hover .dropdown-toggle {
+        color: #0284c7 !important;
+      }
+    }
+
+    .navbar-toggler {
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border-radius: 50%;
+      right: -180px;
+      top: 80px;
+      background: rgba(255, 255, 255, 0.28);
+      filter: blur(6px);
+      z-index: -1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      color: #1e40af;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 25px rgba(30, 64, 175, 0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5.7rem);
+      font-weight: 950;
+      line-height: 1.03;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #0284c7, #2563eb, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #334155;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .blue-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-weight: 750;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+      transition: 0.3s ease;
+    }
+
+    .blue-btn:hover {
+      transform: translateY(-4px);
+      color: white;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.35);
+    }
+
+    .outline-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      color: #1d4ed8;
+      font-weight: 750;
+      text-decoration: none;
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      background: rgba(255, 255, 255, 0.42);
+      transition: 0.3s ease;
+    }
+
+    .outline-btn:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.75);
+      color: #0284c7;
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: 36px;
+      overflow: hidden;
+      min-height: 520px;
+      box-shadow: 0 35px 90px rgba(30, 64, 175, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(0.96);
+    }
+
+    .floating-panel {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    .floating-panel h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 8px;
+    }
+
+    .floating-panel p {
+      color: #334155;
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    /* General */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-weight: 950;
+      margin-bottom: 16px;
+      color: #0f172a;
+      letter-spacing: -0.8px;
+    }
+
+    .section-subtitle {
+      color: #334155;
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .text-muted {
+      color: #334155 !important;
+      line-height: 1.8;
+    }
+
+    .glass-section {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .info-card {
+      height: 100%;
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      box-shadow: 0 22px 60px rgba(30, 64, 175, 0.12);
+      transition: 0.35s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-7px);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 24px 55px rgba(30, 64, 175, 0.18);
+    }
+
+    .info-card h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    .icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #bae6fd, #dbeafe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+    }
+
+    .highlight-box {
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(186, 230, 253, 0.72), rgba(219, 234, 254, 0.83));
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      box-shadow: 0 25px 70px rgba(30, 64, 175, 0.14);
+    }
+
+    .highlight-box h4 {
+      color: #0369a1;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    /* Sticky Apple-like Scroll Section */
+    .apple-section {
+      min-height: 240vh;
+      position: relative;
+    }
+
+    .apple-sticky {
+      position: sticky;
+      top: 78px;
+      min-height: calc(100vh - 78px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .apple-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(15, 23, 42, 0.55), rgba(30, 64, 175, 0.35)),
+        url("https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 0.4s ease;
+      z-index: -2;
+    }
+
+    .apple-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 0.28) 100%);
+    }
+
+    .apple-content {
+      color: white;
+      max-width: 760px;
+      padding: 60px 0;
+    }
+
+    .apple-chip {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+
+    .apple-content h2 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 950;
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      margin-bottom: 22px;
+    }
+
+    .apple-content p {
+      font-size: 1.12rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 620px;
+    }
+
+    .apple-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .mini-glass {
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.17);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .mini-glass strong {
+      display: block;
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-glass span {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Timeline */
+    .timeline-wrapper {
+      position: relative;
+    }
+
+    .timeline-wrapper::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(37, 99, 235, 0.2);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 34px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-card {
+      width: calc(50% - 35px);
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 18px 45px rgba(30, 64, 175, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .timeline-card h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .timeline-dot {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.28);
+      z-index: 2;
+    }
+
+    /* Media Cards */
+    .media-card {
+      overflow: hidden;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 24px 60px rgba(30, 64, 175, 0.13);
+      height: 100%;
+      transition: 0.35s ease;
+    }
+
+    .media-card:hover {
+      transform: translateY(-7px);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .media-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .media-content {
+      padding: 26px;
+    }
+
+    .media-content h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    /* Chart */
+    .chart-card {
+      padding: 30px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 24px 65px rgba(30, 64, 175, 0.13);
+      height: 100%;
+    }
+
+    .chart-holder {
+      height: 320px;
+      position: relative;
+    }
+
+    /* Accordion */
+    .accordion-item {
+      border: none;
+      margin-bottom: 14px;
+      border-radius: 22px !important;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.56);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 14px 35px rgba(30, 64, 175, 0.09);
+    }
+
+    .accordion-button {
+      background: rgba(255, 255, 255, 0.55);
+      color: #075985;
+      font-weight: 800;
+      padding: 20px 24px;
+      box-shadow: none !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: rgba(219, 234, 254, 0.85);
+      color: #1d4ed8;
+    }
+
+    .accordion-body {
+      color: #334155;
+      line-height: 1.8;
+      padding: 22px 24px;
+    }
+
+    /* Checklist */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .check-item {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #334155;
+      line-height: 1.65;
+    }
+
+    .check-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.14);
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    .glass-footer {
+      width: 100%;
+      padding: 42px 8%;
+      margin-top: 24px;
+      background: linear-gradient(
+        135deg,
+        rgba(20, 85, 160, 0.42),
+        rgba(80, 170, 255, 0.2)
+      );
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 -20px 60px rgba(20, 80, 160, 0.22);
+      color: #ffffff;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.9fr 0.9fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand {
+      font-size: 1.45rem;
+      font-weight: 950;
+      letter-spacing: -0.4px;
+      margin-bottom: 14px;
+    }
+
+    .footer-desc {
+      color: rgba(239, 246, 255, 0.78);
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 22px;
+    }
+
+    .footer-column h4 {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: rgba(220, 240, 255, 0.72);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .footer-column a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.92rem;
+      font-weight: 650;
+      margin-bottom: 12px;
+      transition: 0.25s ease;
+    }
+
+    .footer-column a:hover {
+      color: #bfe8ff;
+      transform: translateX(4px);
+    }
+
+    .footer-copy {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(220, 240, 255, 0.6);
+      font-size: 0.82rem;
+      font-weight: 650;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .float-in {
+      opacity: 0;
+      transform: translateY(35px);
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero {
+        padding-top: 120px;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .hero-visual img {
+        height: 430px;
+      }
+
+      .timeline-wrapper::before {
+        left: 26px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        flex-direction: row;
+      }
+
+      .timeline-card {
+        width: calc(100% - 75px);
+        margin-left: 75px;
+      }
+
+      .timeline-dot {
+        left: 26px;
+        transform: translateX(-50%);
+      }
+
+      .apple-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 42px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1,
+      .apple-content h2 {
+        letter-spacing: -1px;
+      }
+
+      .hero-actions {
+        display: block;
+      }
+
+      .outline-btn {
+        margin-top: 12px;
+      }
+
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-holder {
+        height: 280px;
+      }
+
+      .glass-footer {
+        padding: 45px 7%;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .footer-copy {
+        display: block;
+        line-height: 1.8;
+      }
+    }
+    .navbar {
+      background: rgba(239, 246, 255, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 0;
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 950;
+      letter-spacing: -0.4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.23);
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: #1e3a8a !important;
+      font-weight: 720;
+      margin-left: 8px;
+      padding: 9px 13px !important;
+      border-radius: 999px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0369a1 !important;
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .dropdown-item {
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><span class="brand-mark">FP</span>FuturePath</a>
+
+      <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Discover
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="discover.html">Pathfinder Quiz</a></li>
+              <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+              <li><a class="dropdown-item" href="skills.html">Skills</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="mentorship.html">Mentorship</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Guides
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="future-job-trends.html">Future Job Trends</a></li>
+              <li><a class="dropdown-item active" href="interview-tips.html">Interview Tips</a></li>
+              <li><a class="dropdown-item" href="portfolio-guide.html">Portfolio Guide</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="nstories.html">News & Stories</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-6 float-in">
+          <div class="hero-badge">Interview Confidence Guide</div>
+
+          <h1>Walk into interviews with <span>clarity.</span></h1>
+
+          <p>
+            Interviews are not about sounding perfect. They are about showing preparation,
+            confidence, self-awareness and a willingness to learn. Use this guide to prepare
+            before, perform during and reflect after every interview.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#steps" class="blue-btn">Start Preparing</a>
+            <a href="#questions" class="outline-btn">View Questions</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 float-in">
+          <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80" alt="Professional interview discussion">
+
+            <div class="floating-panel">
+              <h4>First impression matters</h4>
+              <p>
+                Strong interviews are built before the interview begins through research,
+                preparation and clear examples.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Overview Cards -->
+  <section class="py-5 glass-section">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">The Interview Success Formula</h2>
+        <p class="section-subtitle">
+          A professional interview is not just one conversation. It is a process of preparation,
+          communication and reflection.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">🔎</div>
+            <h4>Research</h4>
+            <p class="text-muted">
+              Understand the company, role, values and interviewer so your answers sound relevant and informed.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">💬</div>
+            <h4>Practise</h4>
+            <p class="text-muted">
+              Prepare answers, conduct mock interviews and practise speaking naturally instead of memorising.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">📁</div>
+            <h4>Prepare</h4>
+            <p class="text-muted">
+              Bring relevant documents, arrive early and be ready to show evidence of your skills and experience.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Apple-like Sticky Transition -->
+  <section class="apple-section">
+    <div class="apple-sticky">
+      <div class="apple-bg" id="appleBg"></div>
+
+      <div class="container">
+        <div class="apple-content reveal">
+          <div class="apple-chip">Preparation changes everything</div>
+
+          <h2>Confidence is not luck. </h2>
+
+          <p>
+            The strongest candidates usually do not give the longest answers.
+            They give answers that are clear, specific and connected to the opportunity.
+            Research helps you understand the role. Practice helps you speak calmly.
+            Reflection helps you improve for the next interview.
+          </p>
+
+          <div class="apple-cards">
+            <div class="mini-glass">
+              <strong>01</strong>
+              <span>Know the organisation before you enter the room.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>02</strong>
+              <span>Prepare examples that show your strengths in action.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>03</strong>
+              <span>Practise your answers so they sound natural, not robotic.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>04</strong>
+              <span>Bring your documents and show that you think ahead.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Steps -->
+  <section class="py-5" id="steps">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">5 Steps to Prepare for an Interview</h2>
+        <p class="section-subtitle">
+          Use these steps as a simple preparation pathway before your next interview.
+        </p>
+      </div>
+
+      <div class="timeline-wrapper">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-card">
+            <h4>Research the Company</h4>
+            <p class="text-muted mb-0">
+              Learn about the company’s background, history, mission, vision, values and key selling points.
+              This shows that you are serious about the opportunity and helps you understand whether the culture suits you.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-card">
+            <h4>Research the Interviewer</h4>
+            <p class="text-muted mb-0">
+              If you know who is interviewing you, understand their role, job scope and professional background.
+              This can help you connect better during the conversation.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-card">
+            <h4>Prepare Answers</h4>
+            <p class="text-muted mb-0">
+              Prepare for both common interview questions and role-specific questions.
+              Avoid memorising everything. Instead, prepare key points and real examples.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-card">
+            <h4>Conduct a Mock Interview</h4>
+            <p class="text-muted mb-0">
+              Practise with a friend, family member or mirror. You can also record yourself to review your tone,
+              body language and clarity.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-card">
+            <h4>Prepare Your Documents</h4>
+            <p class="text-muted mb-0">
+              Bring copies of your resume, portfolio, certificates or other relevant materials.
+              This shows that you are organised and ready for different situations.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Media + Chart Section -->
+  <section class="py-5 glass-section">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">What Interviewers Often Notice</h2>
+        <p class="section-subtitle">
+          Interviewers usually evaluate more than your answers. They also observe your preparation,
+          communication and attitude.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+
+        <div class="col-lg-6 reveal">
+          <div class="chart-card">
+            <h4 class="mb-3" style="color:#0369a1; font-weight:850;">Interview Impression Breakdown</h4>
+            <p class="text-muted">
+              This chart shows a simple visual guide to the areas that commonly shape a strong interview impression.
+            </p>
+
+            <div class="chart-holder">
+              <canvas id="interviewChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <div class="media-card">
+                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Team discussion">
+                <div class="media-content">
+                  <h4>Communication</h4>
+                  <p class="text-muted mb-0">
+                    Speak clearly, listen carefully and answer the question directly.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="media-card">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Online interview preparation">
+                <div class="media-content">
+                  <h4>Preparation</h4>
+                  <p class="text-muted mb-0">
+                    Research and practice help your answers feel more confident and relevant.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STAR Method -->
+  <section class="py-5">
+    <div class="container">
+
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-5 reveal">
+          <h2 class="section-title">Use the STAR Method</h2>
+          <p class="text-muted">
+            When interviewers ask about your experiences, the STAR method helps you avoid messy answers.
+            It gives your response a clear beginning, middle and ending.
+          </p>
+
+          <div class="highlight-box mt-4">
+            <h4>Example</h4>
+            <p class="text-muted mb-0">
+              “During a group project, we were behind schedule. I helped organise the tasks,
+              assigned roles and checked progress daily. As a result, we finished on time and presented confidently.”
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-7 reveal">
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">S</div>
+                <h4>Situation</h4>
+                <p class="text-muted">
+                  Briefly explain the background. What was happening?
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">T</div>
+                <h4>Task</h4>
+                <p class="text-muted">
+                  Describe your responsibility. What were you expected to do?
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">A</div>
+                <h4>Action</h4>
+                <p class="text-muted">
+                  Share the steps you personally took to solve the issue.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">R</div>
+                <h4>Result</h4>
+                <p class="text-muted">
+                  End with the outcome, impact or lesson learnt.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Common Questions Accordion -->
+  <section class="py-5 glass-section" id="questions">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Common Interview Questions</h2>
+        <p class="section-subtitle">
+          Click each question to see how you can approach it. This keeps the page cleaner and less text-heavy.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9 reveal">
+
+          <div class="accordion" id="questionAccordion">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                  Tell me about yourself.
+                </button>
+              </h2>
+              <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  Focus on your current stage, key strengths, relevant experiences and why you are interested
+                  in the opportunity. Keep it short and purposeful.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                  Why do you want this job?
+                </button>
+              </h2>
+              <div id="q2" class="accordion-collapse collapse" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  Link the role to your interests, skills and goals. Show that you understand what the role involves,
+                  not just that you want experience.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                  What are your strengths and weaknesses?
+                </button>
+              </h2>
+              <div id="q3" class="accordion-collapse collapse" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  For strengths, give evidence. For weaknesses, be honest but show improvement.
+                  For example, mention what you are doing to manage or overcome the weakness.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                  Tell me about a difficult colleague or teammate.
+                </button>
+              </h2>
+              <div id="q4" class="accordion-collapse collapse" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  Avoid blaming others. Use the STAR method to show maturity, communication and problem-solving.
+                  Focus on how you handled the situation professionally.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                  How can you contribute to the team?
+                </button>
+              </h2>
+              <div id="q5" class="accordion-collapse collapse" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  Mention skills that are useful to the team, such as responsibility, communication,
+                  creativity, organisation or willingness to learn. Support your answer with an example.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                  Where do you see yourself in five years?
+                </button>
+              </h2>
+              <div id="q6" class="accordion-collapse collapse" data-bs-parent="#questionAccordion">
+                <div class="accordion-body">
+                  Show ambition while staying realistic. You can talk about learning, growth,
+                  developing useful skills and contributing meaningfully in your chosen field.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Checklist -->
+  <section class="py-5">
+    <div class="container">
+
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-5 reveal">
+          <h2 class="section-title">Interview Readiness Checklist</h2>
+          <p class="text-muted">
+            Use this checklist the night before your interview. It helps you reduce stress and avoid last-minute panic.
+          </p>
+        </div>
+
+        <div class="col-lg-7 reveal">
+          <div class="check-grid">
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I know the company’s background, mission, vision and values.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I understand the role and why I am interested in it.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have prepared examples of my strengths and experiences.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have practised answering questions aloud.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have prepared my resume, certificates or portfolio.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I know the interview time, location and dress code.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="py-5 glass-section">
+    <div class="container text-center reveal">
+      <h2 class="section-title">Your next opportunity starts with preparation.</h2>
+
+      <p class="section-subtitle mb-4">
+        Explore careers, build useful skills and prepare yourself to speak with confidence.
+      </p>
+
+      <a href="portfolio-guide.html" class="blue-btn">Craft Portfolio</a>
+      <a href="skills.html" class="outline-btn">Build Skills</a>
+    </div>
+  </section>
+
+  <footer class="glass-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <div class="footer-brand">FuturePath</div>
+        <p class="footer-desc">
+          Helping youths discover careers, build skills and prepare for the future of work.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <a href="discover.html">Pathfinder Quiz</a>
+        <a href="careers.html">Careers</a>
+        <a href="skills.html">Skills</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="nstories.html">News & Stories</a>
+        <a href="future-job-trends.html">Future Job Trends</a>
+        <a href="interview-tips.html">Interview Tips</a>
+        <a href="portfolio-guide.html">Portfolio Guide</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>About & Contact</h4>
+        <a href="about.html">About FuturePath</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      <span>© 2026 FuturePath. All Rights Reserved.</span>
+      <span>Discover. Upskill. Prepare.</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* Reveal Animation */
+    const revealElements = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+      revealElements.forEach((element) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 120;
+
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
+    /* Apple-like background movement */
+    const appleBg = document.getElementById("appleBg");
+    const appleSection = document.querySelector(".apple-section");
+
+    window.addEventListener("scroll", () => {
+      const rect = appleSection.getBoundingClientRect();
+      const sectionHeight = appleSection.offsetHeight - window.innerHeight;
+      const progress = Math.min(Math.max(-rect.top / sectionHeight, 0), 1);
+
+      const scale = 1.04 + progress * 0.12;
+      const yMove = progress * 40;
+
+      appleBg.style.transform = `scale(${scale}) translateY(${yMove}px)`;
+    });
+
+    /* Chart */
+    const ctx = document.getElementById("interviewChart");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Preparation",
+          "Communication",
+          "Relevant Examples",
+          "Professional Attitude",
+          "Reflection"
+        ],
+        datasets: [{
+          data: [28, 24, 20, 18, 10],
+          backgroundColor: [
+            "rgba(37, 99, 235, 0.85)",
+            "rgba(14, 165, 233, 0.85)",
+            "rgba(56, 189, 248, 0.85)",
+            "rgba(147, 197, 253, 0.9)",
+            "rgba(191, 219, 254, 0.95)"
+          ],
+          borderColor: "rgba(255, 255, 255, 0.85)",
+          borderWidth: 3,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "64%",
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: "#334155",
+              font: {
+                family: "Montserrat",
+                size: 12,
+                weight: "600"
+              },
+              padding: 18,
+              boxWidth: 14
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleFont: {
+              family: "Montserrat"
+            },
+            bodyFont: {
+              family: "Montserrat"
+            },
+            callbacks: {
+              label: function(context) {
+                return context.label + ": " + context.raw + "%";
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

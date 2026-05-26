@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Portfolio Guide | FuturePath</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.35), transparent 35%),
+        linear-gradient(135deg, #e0f2fe, #bfdbfe, #93c5fd);
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055) 1px, transparent 1px);
+      background-size: 55px 55px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(239, 246, 255, 0.88);
+      backdrop-filter: blur(18px);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 850;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+      color: #1e40af !important;
+      font-weight: 550;
+      margin-left: 10px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0284c7 !important;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border-radius: 50%;
+      right: -180px;
+      top: 80px;
+      background: rgba(255, 255, 255, 0.28);
+      filter: blur(6px);
+      z-index: -1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      color: #1e40af;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 25px rgba(30, 64, 175, 0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5.7rem);
+      font-weight: 950;
+      line-height: 1.03;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #0284c7, #2563eb, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #334155;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .blue-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-weight: 750;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+      transition: 0.3s ease;
+    }
+
+    .blue-btn:hover {
+      transform: translateY(-4px);
+      color: white;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.35);
+    }
+
+    .outline-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 50px;
+      color: #1d4ed8;
+      font-weight: 750;
+      text-decoration: none;
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      background: rgba(255, 255, 255, 0.42);
+      transition: 0.3s ease;
+    }
+
+    .outline-btn:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.75);
+      color: #0284c7;
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: 36px;
+      overflow: hidden;
+      min-height: 520px;
+      box-shadow: 0 35px 90px rgba(30, 64, 175, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(0.96);
+    }
+
+    .floating-panel {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    .floating-panel h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 8px;
+    }
+
+    .floating-panel p {
+      color: #334155;
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    /* General */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-weight: 950;
+      margin-bottom: 16px;
+      color: #0f172a;
+      letter-spacing: -0.8px;
+    }
+
+    .section-subtitle {
+      color: #334155;
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .text-muted {
+      color: #334155 !important;
+      line-height: 1.8;
+    }
+
+    .glass-section {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(37, 99, 235, 0.12);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .info-card {
+      height: 100%;
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      box-shadow: 0 22px 60px rgba(30, 64, 175, 0.12);
+      transition: 0.35s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-7px);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 24px 55px rgba(30, 64, 175, 0.18);
+    }
+
+    .info-card h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    .icon-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #bae6fd, #dbeafe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+    }
+
+    .highlight-box {
+      padding: 34px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(186, 230, 253, 0.72), rgba(219, 234, 254, 0.83));
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      box-shadow: 0 25px 70px rgba(30, 64, 175, 0.14);
+    }
+
+    .highlight-box h4 {
+      color: #0369a1;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    /* Sticky Apple-like Section */
+    .apple-section {
+      min-height: 340vh;
+      position: relative;
+    }
+
+    .apple-sticky {
+      position: sticky;
+      top: 78px;
+      min-height: calc(100vh - 78px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .apple-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(15, 23, 42, 0.62), rgba(30, 64, 175, 0.36)),
+        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 0.4s ease;
+      z-index: -2;
+    }
+
+    .apple-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 0.28) 100%);
+    }
+
+    .apple-content {
+      color: white;
+      max-width: 760px;
+      padding: 60px 0;
+    }
+
+    .apple-chip {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+
+    .apple-content h2 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 950;
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      margin-bottom: 22px;
+    }
+
+    .apple-content p {
+      font-size: 1.12rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 620px;
+    }
+
+    .apple-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .mini-glass {
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.17);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .mini-glass strong {
+      display: block;
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-glass span {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Portfolio Cards */
+    .portfolio-type {
+      overflow: hidden;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 24px 60px rgba(30, 64, 175, 0.13);
+      height: 100%;
+      transition: 0.35s ease;
+    }
+
+    .portfolio-type:hover {
+      transform: translateY(-7px);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .portfolio-type img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .portfolio-content {
+      padding: 26px;
+    }
+
+    .portfolio-content h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    /* Timeline */
+    .timeline-wrapper {
+      position: relative;
+    }
+
+    .timeline-wrapper::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(37, 99, 235, 0.2);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 34px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-card {
+      width: calc(50% - 35px);
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 18px 45px rgba(30, 64, 175, 0.1);
+      transition: 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .timeline-card h4 {
+      color: #0369a1;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .timeline-dot {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.28);
+      z-index: 2;
+    }
+
+    /* Chart */
+    .chart-card {
+      padding: 30px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 24px 65px rgba(30, 64, 175, 0.13);
+      height: 100%;
+    }
+
+    .chart-holder {
+      height: 320px;
+      position: relative;
+    }
+
+    /* Accordion */
+    .accordion-item {
+      border: none;
+      margin-bottom: 14px;
+      border-radius: 22px !important;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.56);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 14px 35px rgba(30, 64, 175, 0.09);
+    }
+
+    .accordion-button {
+      background: rgba(255, 255, 255, 0.55);
+      color: #075985;
+      font-weight: 800;
+      padding: 20px 24px;
+      box-shadow: none !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: rgba(219, 234, 254, 0.85);
+      color: #1d4ed8;
+    }
+
+    .accordion-body {
+      color: #334155;
+      line-height: 1.8;
+      padding: 22px 24px;
+    }
+
+    /* Checklist */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .check-item {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #334155;
+      line-height: 1.65;
+    }
+
+    .check-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.14);
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    /* Template Download Section */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .template-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.76);
+      box-shadow: 0 24px 65px rgba(30, 64, 175, 0.13);
+      transition: 0.35s ease;
+    }
+
+    .template-card:hover {
+      transform: translateY(-7px);
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 26px 60px rgba(30, 64, 175, 0.18);
+    }
+
+    .template-card::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -55px;
+      bottom: -55px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+    }
+
+    .template-tag {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+    }
+
+    .template-card h4 {
+      color: #0369a1;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .template-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .template-list {
+      margin: 18px 0 24px;
+      padding-left: 0;
+      list-style: none;
+      color: #334155;
+      line-height: 1.75;
+    }
+
+    .template-list li {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .template-list li::before {
+      content: "✓";
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.12);
+      color: #1d4ed8;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    .download-btn {
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .cta-panel {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 58px 34px;
+      border-radius: 38px;
+      background:
+        radial-gradient(circle at top left, rgba(186, 230, 253, 0.75), transparent 38%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(219, 234, 254, 0.72));
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 30px 80px rgba(30, 64, 175, 0.16);
+      text-align: center;
+    }
+
+    .cta-panel h2 {
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(2.2rem, 5vw, 4.3rem);
+      line-height: 1.08;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    .glass-footer {
+      width: 100%;
+      padding: 42px 8%;
+      margin-top: 60px;
+      background: linear-gradient(
+        135deg,
+        rgba(20, 85, 160, 0.42),
+        rgba(80, 170, 255, 0.2)
+      );
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 -20px 60px rgba(20, 80, 160, 0.22);
+      color: #ffffff;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.9fr 0.9fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand {
+      font-size: 1.45rem;
+      font-weight: 950;
+      letter-spacing: -0.4px;
+      margin-bottom: 14px;
+    }
+
+    .footer-desc {
+      color: rgba(239, 246, 255, 0.78);
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 22px;
+    }
+
+    .footer-column h4 {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: rgba(220, 240, 255, 0.72);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .footer-column a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.92rem;
+      font-weight: 650;
+      margin-bottom: 12px;
+      transition: 0.25s ease;
+    }
+
+    .footer-column a:hover {
+      color: #bfe8ff;
+      transform: translateX(4px);
+    }
+
+    .footer-copy {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(220, 240, 255, 0.6);
+      font-size: 0.82rem;
+      font-weight: 650;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .float-in {
+      opacity: 0;
+      transform: translateY(35px);
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero {
+        padding-top: 120px;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .hero-visual img {
+        height: 430px;
+      }
+
+      .timeline-wrapper::before {
+        left: 26px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        flex-direction: row;
+      }
+
+      .timeline-card {
+        width: calc(100% - 75px);
+        margin-left: 75px;
+      }
+
+      .timeline-dot {
+        left: 26px;
+        transform: translateX(-50%);
+      }
+
+      .apple-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 42px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1,
+      .apple-content h2 {
+        letter-spacing: -1px;
+      }
+
+      .hero-actions {
+        display: block;
+      }
+
+      .outline-btn {
+        margin-top: 12px;
+      }
+
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-holder {
+        height: 280px;
+      }
+
+      .glass-footer {
+        padding: 45px 7%;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .footer-copy {
+        display: block;
+        line-height: 1.8;
+      }
+    }
+    .navbar {
+      background: rgba(239, 246, 255, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 0;
+    }
+
+    .navbar-brand {
+      color: #1e3a8a !important;
+      font-weight: 950;
+      letter-spacing: -0.4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.23);
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: #1e3a8a !important;
+      font-weight: 720;
+      margin-left: 8px;
+      padding: 9px 13px !important;
+      border-radius: 999px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0369a1 !important;
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .dropdown-menu {
+      padding: 10px;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: 18px;
+      background: rgba(239, 246, 255, 0.96);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.14);
+    }
+
+    .dropdown-item {
+      border-radius: 12px;
+      color: #1e3a8a;
+      font-weight: 700;
+      padding: 9px 14px;
+      transition: 0.25s ease;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus,
+    .dropdown-item.active {
+      color: #0284c7;
+      background: rgba(219, 234, 254, 0.85);
+    }
+
+    @media (min-width: 992px) {
+      .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+      }
+
+      .navbar .dropdown:hover .dropdown-toggle {
+        color: #0284c7 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><span class="brand-mark">FP</span>FuturePath</a>
+
+      <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Discover</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="discover.html">Pathfinder Quiz</a></li>
+              <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+              <li><a class="dropdown-item" href="skills.html">Skills</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="mentorship.html">Mentorship</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Guides</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="future-job-trends.html">Future Job Trends</a></li>
+              <li><a class="dropdown-item" href="interview-tips.html">Interview Tips</a></li>
+              <li><a class="dropdown-item active" href="portfolio-guide.html">Portfolio Guide</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="nstories.html">News & Stories</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-6 float-in">
+          <div class="hero-badge">Build Your Personal Brand</div>
+
+          <h1>Show your growth through a <span>strong portfolio.</span></h1>
+
+          <p>
+            A portfolio is more than a folder of work. It is a clear, visual and organised way
+            to show your skills, achievements, reflections and potential. Use this guide to build
+            a portfolio that feels professional, personal and easy to understand.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#steps" class="blue-btn">Start Building</a>
+            <a href="#checklist" class="outline-btn">View Checklist</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 float-in">
+          <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" alt="Student building digital portfolio">
+
+            <div class="floating-panel">
+              <h4>Your work tells a story</h4>
+              <p>
+                A strong portfolio helps others understand what you can do, how you think and how you have grown.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Cards -->
+  <section class="py-5 glass-section">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">What Should a Portfolio Do?</h2>
+        <p class="section-subtitle">
+          A good portfolio should not feel like a random collection of files. It should guide the viewer
+          through your abilities, experiences and learning journey.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">🎯</div>
+            <h4>Show Direction</h4>
+            <p class="text-muted">
+              Your portfolio should show what fields, skills or opportunities you are interested in exploring.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">🧩</div>
+            <h4>Show Evidence</h4>
+            <p class="text-muted">
+              Instead of only saying you are creative or hardworking, include projects that prove it.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card">
+            <div class="icon-circle">🌱</div>
+            <h4>Show Growth</h4>
+            <p class="text-muted">
+              Reflections help others understand how you improved, adapted and learnt from your experiences.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Apple-like Sticky Transition -->
+  <section class="apple-section">
+    <div class="apple-sticky">
+      <div class="apple-bg" id="appleBg"></div>
+
+      <div class="container">
+        <div class="apple-content reveal">
+          <div class="apple-chip">From work to story</div>
+
+          <h2>A portfolio turns your effort into something people can see.</h2>
+
+          <p>
+            Many students have experiences, projects and achievements, but they are often scattered across
+            documents, photos, slides and certificates. A portfolio brings everything together in one clear
+            story. It helps teachers, mentors, interviewers and future employers understand your strengths faster.
+          </p>
+
+          <div class="apple-cards">
+            <div class="mini-glass">
+              <strong>01</strong>
+              <span>Collect your best work, not every piece of work.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>02</strong>
+              <span>Explain your role, process and impact clearly.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>03</strong>
+              <span>Use visuals to make your achievements easier to understand.</span>
+            </div>
+
+            <div class="mini-glass">
+              <strong>04</strong>
+              <span>Keep updating it as your skills and goals grow.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Types -->
+  <section class="py-5">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Types of Portfolio You Can Create</h2>
+        <p class="section-subtitle">
+          Your portfolio format depends on your purpose. Choose the one that best supports your goal.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+          <div class="portfolio-type">
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80" alt="Digital portfolio workspace">
+            <div class="portfolio-content">
+              <h4>Digital Portfolio</h4>
+              <p class="text-muted mb-0">
+                Best for websites, design work, coding projects, videos, writing samples and online applications.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="portfolio-type">
+            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80" alt="Resume and documents">
+            <div class="portfolio-content">
+              <h4>Document Portfolio</h4>
+              <p class="text-muted mb-0">
+                Best for interviews, school applications, leadership opportunities and printed submissions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="portfolio-type">
+            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=80" alt="Creative portfolio design">
+            <div class="portfolio-content">
+              <h4>Creative Portfolio</h4>
+              <p class="text-muted mb-0">
+                Best for art, media, photography, design, storytelling, publicity and creative projects.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Timeline Steps -->
+  <section class="py-5 glass-section" id="steps">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">How to Build a Strong Portfolio</h2>
+        <p class="section-subtitle">
+          Follow these steps to turn your experiences into a clean, purposeful and professional portfolio.
+        </p>
+      </div>
+
+      <div class="timeline-wrapper">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-card">
+            <h4>Define Your Purpose</h4>
+            <p class="text-muted mb-0">
+              Decide what your portfolio is for. Is it for a job interview, school application,
+              leadership role, competition or mentorship opportunity? Your purpose affects what you include.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-card">
+            <h4>Select Your Best Work</h4>
+            <p class="text-muted mb-0">
+              Choose quality over quantity. Include projects, certificates, designs, writing samples,
+              photos or achievements that best show your skills and growth.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-card">
+            <h4>Explain the Context</h4>
+            <p class="text-muted mb-0">
+              For each item, explain what the project was, your role, the skills used and the outcome.
+              Do not assume the viewer already understands your work.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-card">
+            <h4>Add Reflection</h4>
+            <p class="text-muted mb-0">
+              Reflection makes your portfolio more mature. Explain what you learnt, what challenged you
+              and how the experience helped you improve.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-card">
+            <h4>Design for Clarity</h4>
+            <p class="text-muted mb-0">
+              Keep your layout clean. Use headings, short descriptions, visuals and spacing so that your
+              portfolio is easy to scan and does not feel overwhelming.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">6</div>
+          <div class="timeline-card">
+            <h4>Update Regularly</h4>
+            <p class="text-muted mb-0">
+              Your portfolio should grow with you. Update it whenever you complete a meaningful project,
+              gain a new skill or receive a new achievement.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Chart + Components -->
+  <section class="py-5">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">What a Portfolio Should Include</h2>
+        <p class="section-subtitle">
+          A balanced portfolio includes both evidence and explanation. Visuals attract attention, but reflection
+          shows maturity.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+
+        <div class="col-lg-6 reveal">
+          <div class="chart-card">
+            <h4 class="mb-3" style="color:#0369a1; font-weight:850;">Portfolio Content Balance</h4>
+            <p class="text-muted">
+              This chart gives a simple visual guide for balancing different sections in a student portfolio.
+            </p>
+
+            <div class="chart-holder">
+              <canvas id="portfolioChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">👤</div>
+                <h4>About Me</h4>
+                <p class="text-muted">
+                  A short introduction about your interests, strengths, values and goals.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">📂</div>
+                <h4>Projects</h4>
+                <p class="text-muted">
+                  Selected work that shows your skills, creativity, leadership or problem-solving.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">🏅</div>
+                <h4>Achievements</h4>
+                <p class="text-muted">
+                  Awards, certificates, competitions, leadership roles or meaningful milestones.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">📝</div>
+                <h4>Reflection</h4>
+                <p class="text-muted">
+                  Short reflections explaining what you learnt and how you improved.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Project Writing Framework -->
+  <section class="py-5 glass-section">
+    <div class="container">
+
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-5 reveal">
+          <h2 class="section-title">Use the CARI Framework</h2>
+          <p class="text-muted">
+            When describing a project, do not just paste an image or certificate. Use a short framework
+            to explain why the work matters.
+          </p>
+
+          <div class="highlight-box mt-4">
+            <h4>Example</h4>
+            <p class="text-muted mb-0">
+              “For a school publicity project, I designed posters and helped plan the campaign visuals.
+              I used Canva, layout principles and feedback from my team to improve the design. This taught me
+              how to communicate clearly through visuals and work under deadlines.”
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-7 reveal">
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">C</div>
+                <h4>Context</h4>
+                <p class="text-muted">
+                  What was the project, event, role or opportunity about?
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">A</div>
+                <h4>Action</h4>
+                <p class="text-muted">
+                  What did you personally do? What tools, skills or strategies did you use?
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">R</div>
+                <h4>Result</h4>
+                <p class="text-muted">
+                  What was the outcome, impact, product or improvement?
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="icon-circle">I</div>
+                <h4>Insight</h4>
+                <p class="text-muted">
+                  What did you learn, and how did the experience help you grow?
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Mistakes Accordion -->
+  <section class="py-5">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Common Portfolio Mistakes</h2>
+        <p class="section-subtitle">
+          Click each point to understand how to avoid mistakes that make portfolios look messy or unclear.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9 reveal">
+
+          <div class="accordion" id="portfolioAccordion">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#m1">
+                  Including too many items
+                </button>
+              </h2>
+              <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#portfolioAccordion">
+                <div class="accordion-body">
+                  A portfolio should show your best and most relevant work. Too many items make it harder for the viewer
+                  to notice your strongest achievements.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m2">
+                  Not explaining your role
+                </button>
+              </h2>
+              <div id="m2" class="accordion-collapse collapse" data-bs-parent="#portfolioAccordion">
+                <div class="accordion-body">
+                  If a project was done in a team, make your personal contribution clear. Explain what you planned,
+                  designed, led, wrote, researched or improved.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m3">
+                  Making it too text-heavy
+                </button>
+              </h2>
+              <div id="m3" class="accordion-collapse collapse" data-bs-parent="#portfolioAccordion">
+                <div class="accordion-body">
+                  Use short paragraphs, clear headings, photos, screenshots and bullet-style descriptions.
+                  Let visuals support the story instead of writing long blocks of text.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m4">
+                  Using inconsistent design
+                </button>
+              </h2>
+              <div id="m4" class="accordion-collapse collapse" data-bs-parent="#portfolioAccordion">
+                <div class="accordion-body">
+                  Use consistent fonts, colours, spacing and image sizes. A clean design makes your work look more
+                  professional and easier to read.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m5">
+                  Forgetting reflection
+                </button>
+              </h2>
+              <div id="m5" class="accordion-collapse collapse" data-bs-parent="#portfolioAccordion">
+                <div class="accordion-body">
+                  Reflection shows maturity. It helps the viewer understand how you think, learn from challenges
+                  and improve over time.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Checklist -->
+  <section class="py-5 glass-section" id="checklist">
+    <div class="container">
+
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-5 reveal">
+          <h2 class="section-title">Portfolio Readiness Checklist</h2>
+          <p class="text-muted">
+            Before sharing your portfolio, use this checklist to make sure it is clear, complete and professional.
+          </p>
+        </div>
+
+        <div class="col-lg-7 reveal">
+          <div class="check-grid">
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have a clear purpose for my portfolio.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>My introduction explains my interests, strengths and goals.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>Each project includes context, action, result and insight.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have selected my strongest and most relevant work.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>The design is clean, consistent and not too text-heavy.</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-icon">✓</div>
+              <div>I have checked spelling, links, images and document formatting.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Downloadable Templates -->
+  <section class="py-5" id="templates">
+    <div class="container">
+
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Download a Portfolio Template</h2>
+        <p class="section-subtitle">
+          Start faster with simple templates that help you organise your achievements, projects and reflections clearly.
+        </p>
+      </div>
+
+      <div class="template-grid reveal">
+
+        <div class="template-card">
+          <span class="template-tag">Starter</span>
+          <h4>Student Portfolio Template</h4>
+          <p class="text-muted">
+            A clean structure for students who want to present their profile, projects, achievements and reflections.
+          </p>
+          <ul class="template-list">
+            <li>About me section</li>
+            <li>Project write-up prompts</li>
+            <li>Achievement and reflection pages</li>
+          </ul>
+          <button class="blue-btn download-btn" data-template="portfolio">Download Template</button>
+        </div>
+
+        <div class="template-card">
+          <span class="template-tag">Project</span>
+          <h4>Project Showcase Template</h4>
+          <p class="text-muted">
+            Use this when you want each project to look more professional and easier to understand at a glance.
+          </p>
+          <ul class="template-list">
+            <li>Context, action, result and insight</li>
+            <li>Skills used and tools applied</li>
+            <li>Evidence and photo placeholder</li>
+          </ul>
+          <button class="blue-btn download-btn" data-template="project">Download Template</button>
+        </div>
+
+        <div class="template-card">
+          <span class="template-tag">Checklist</span>
+          <h4>Portfolio Review Checklist</h4>
+          <p class="text-muted">
+            A final review sheet to help you check clarity, design, spelling, links and overall professionalism.
+          </p>
+          <ul class="template-list">
+            <li>Design and layout check</li>
+            <li>Content quality check</li>
+            <li>Sharing readiness check</li>
+          </ul>
+          <button class="blue-btn download-btn" data-template="checklist">Download Checklist</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="py-5">
+    <div class="container reveal">
+      <div class="cta-panel">
+        <h2 class="section-title">Start with a template, then make it yours.</h2>
+
+        <p class="section-subtitle mb-4">
+          Download a structure, add your strongest evidence and keep improving it as you gain new experiences.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#templates" class="blue-btn">Download Templates</a>
+          <a href="interview-tips.html" class="outline-btn">Prepare for Interviews</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="glass-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <div class="footer-brand">FuturePath</div>
+        <p class="footer-desc">
+          Helping youths discover careers, build skills and prepare for the future of work.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <a href="discover.html">Pathfinder Quiz</a>
+        <a href="careers.html">Careers</a>
+        <a href="skills.html">Skills</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="nstories.html">News & Stories</a>
+        <a href="future-job-trends.html">Future Job Trends</a>
+        <a href="interview-tips.html">Interview Tips</a>
+        <a href="portfolio-guide.html">Portfolio Guide</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>About & Contact</h4>
+        <a href="about.html">About FuturePath</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      <span>© 2026 FuturePath. All Rights Reserved.</span>
+      <span>Discover. Upskill. Prepare.</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* Reveal Animation */
+    const revealElements = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+      revealElements.forEach((element) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 120;
+
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
+    /* Apple-like background movement */
+    const appleBg = document.getElementById("appleBg");
+    const appleSection = document.querySelector(".apple-section");
+
+    window.addEventListener("scroll", () => {
+      const rect = appleSection.getBoundingClientRect();
+      const sectionHeight = appleSection.offsetHeight - window.innerHeight;
+      const progress = Math.min(Math.max(-rect.top / sectionHeight, 0), 1);
+
+      const scale = 1.04 + progress * 0.12;
+      const yMove = progress * 40;
+
+      appleBg.style.transform = `scale(${scale}) translateY(${yMove}px)`;
+    });
+
+    /* Chart */
+    const ctx = document.getElementById("portfolioChart");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Projects",
+          "Reflection",
+          "Achievements",
+          "About Me",
+          "Skills"
+        ],
+        datasets: [{
+          data: [32, 22, 18, 15, 13],
+          backgroundColor: [
+            "rgba(37, 99, 235, 0.85)",
+            "rgba(14, 165, 233, 0.85)",
+            "rgba(56, 189, 248, 0.85)",
+            "rgba(147, 197, 253, 0.9)",
+            "rgba(191, 219, 254, 0.95)"
+          ],
+          borderColor: "rgba(255, 255, 255, 0.85)",
+          borderWidth: 3,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "64%",
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: "#334155",
+              font: {
+                family: "Montserrat",
+                size: 12,
+                weight: "600"
+              },
+              padding: 18,
+              boxWidth: 14
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleFont: {
+              family: "Montserrat"
+            },
+            bodyFont: {
+              family: "Montserrat"
+            },
+            callbacks: {
+              label: function(context) {
+                return context.label + ": " + context.raw + "%";
+              }
+            }
+          }
+        }
+      }
+    });
+
+    /* Downloadable portfolio templates */
+    const templates = {
+      portfolio: {
+        fileName: "FuturePath-Student-Portfolio-Template.doc",
+        title: "Student Portfolio Template",
+        body: `
+          <h1>Student Portfolio Template</h1>
+          <h2>1. About Me</h2>
+          <p>Name:</p>
+          <p>Interests:</p>
+          <p>Strengths:</p>
+          <p>Career or learning goals:</p>
+
+          <h2>2. Skills Snapshot</h2>
+          <ul>
+            <li>Technical skills:</li>
+            <li>Communication skills:</li>
+            <li>Leadership or teamwork skills:</li>
+            <li>Creative or problem-solving skills:</li>
+          </ul>
+
+          <h2>3. Selected Projects</h2>
+          <p><strong>Project Title:</strong></p>
+          <p><strong>Context:</strong> What was the project about?</p>
+          <p><strong>Action:</strong> What did you personally do?</p>
+          <p><strong>Result:</strong> What was achieved?</p>
+          <p><strong>Insight:</strong> What did you learn?</p>
+
+          <h2>4. Achievements</h2>
+          <p>Awards, certificates, competitions, leadership roles or milestones:</p>
+
+          <h2>5. Reflection</h2>
+          <p>What have I improved in? What do I want to work on next?</p>
+        `
+      },
+      project: {
+        fileName: "FuturePath-Project-Showcase-Template.doc",
+        title: "Project Showcase Template",
+        body: `
+          <h1>Project Showcase Template</h1>
+          <p><strong>Project Title:</strong></p>
+          <p><strong>Date or Duration:</strong></p>
+          <p><strong>Role:</strong></p>
+
+          <h2>Context</h2>
+          <p>What was the project, event or task about?</p>
+
+          <h2>Action</h2>
+          <p>What did you personally do? What tools, skills or strategies did you use?</p>
+
+          <h2>Result</h2>
+          <p>What was the outcome, product, improvement or impact?</p>
+
+          <h2>Insight</h2>
+          <p>What did you learn? How did this experience help you grow?</p>
+
+          <h2>Evidence</h2>
+          <p>Add screenshots, photos, links, certificates or feedback here.</p>
+        `
+      },
+      checklist: {
+        fileName: "FuturePath-Portfolio-Checklist.doc",
+        title: "Portfolio Review Checklist",
+        body: `
+          <h1>Portfolio Review Checklist</h1>
+          <h2>Purpose</h2>
+          <ul>
+            <li>My portfolio has a clear purpose.</li>
+            <li>The selected work matches my goal.</li>
+          </ul>
+
+          <h2>Content</h2>
+          <ul>
+            <li>My introduction explains my interests, strengths and goals.</li>
+            <li>Each project explains my role clearly.</li>
+            <li>Each project includes reflection or learning points.</li>
+            <li>I included evidence such as photos, screenshots, links or certificates.</li>
+          </ul>
+
+          <h2>Design</h2>
+          <ul>
+            <li>The layout is clean and not too text-heavy.</li>
+            <li>Fonts, colours and spacing are consistent.</li>
+            <li>Images are clear and relevant.</li>
+          </ul>
+
+          <h2>Final Check</h2>
+          <ul>
+            <li>I checked spelling and grammar.</li>
+            <li>All links work.</li>
+            <li>The file name is professional.</li>
+            <li>The portfolio is ready to share.</li>
+          </ul>
+        `
+      }
+    };
+
+    function downloadTemplate(type) {
+      const template = templates[type];
+      const html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>${template.title}</title>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #111827; padding: 32px; }
+            h1 { color: #1d4ed8; }
+            h2 { color: #0369a1; margin-top: 28px; }
+            p, li { font-size: 14px; }
+          </style>
+        </head>
+        <body>${template.body}</body>
+        </html>
+      `;
+
+      const blob = new Blob([html], { type: "application/msword" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = template.fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.querySelectorAll(".download-btn").forEach((button) => {
+      button.addEventListener("click", () => downloadTemplate(button.dataset.template));
+    });
+  </script>
+
+</body>
+</html>
